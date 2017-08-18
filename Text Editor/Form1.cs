@@ -145,5 +145,17 @@ namespace Text_Editor
                 saveMenuItem_Click(sender, e);
             }
         }
+
+        private void aboutMenuItem_Click(object sender, EventArgs e)
+        {
+
+            String text = "";
+            String author = "Author:  James A. Stewart";
+            string classname = "Web Development Boot Camp";
+            string version = Application.ProductVersion;
+            text = Application.ProductName + "\r\n" + version + "\r\n" +
+                    classname + "\r\n" + author;
+            MessageBox.Show(text);
+        }
     }
 }
