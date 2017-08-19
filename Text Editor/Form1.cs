@@ -152,7 +152,9 @@ namespace Text_Editor
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                filename = saveFileDialog1.FileName;
+                filename = saveFileDialog1.FileName;                
+                string s = filename.Substring(filename.LastIndexOf('\\') + 1);  //pull just the file name from the path
+                Form1.ActiveForm.Text = s;
                 saveMenuItem.Enabled = true;
                 saveMenuItem_Click(sender, e);
             }
