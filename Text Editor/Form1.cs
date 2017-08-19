@@ -26,6 +26,7 @@ namespace Text_Editor
             {
                 openFileDialog1.ShowReadOnly = false;
                 filename = openFileDialog1.FileName;
+                Form1.ActiveForm.Text = openFileDialog1.SafeFileName;
                 saveMenuItem.Enabled = true;
                 StreamReader sr;
                 try
