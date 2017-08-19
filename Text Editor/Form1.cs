@@ -31,7 +31,8 @@ namespace Text_Editor
                 try
                 {
                     sr = new StreamReader(File.OpenRead(filename));
-                }catch (PathTooLongException ex)
+                }
+                catch (PathTooLongException ex)
                 {
                     MessageBox.Show("Failed to open " + filename + ":  " + ex.Message);
                     return;
@@ -58,28 +59,28 @@ namespace Text_Editor
                 }
                 //if we are here, the file is open
 
-                string line="";
+                string line = "";
                 while (!sr.EndOfStream)
                 {
-                    
-                        try
-                        {
-                            line += sr.ReadLine() + "\r\n";
-                        }
-                        catch (IOException ex)
-                        {
-                            MessageBox.Show("Failed to read " + filename + ":  " + ex.Message);
-                            break;
-                        }
-                        catch (OutOfMemoryException ex)
-                        {
-                            MessageBox.Show("Failed to read " + filename + ":  " + ex.Message);
-                            break;
-                        }
-                    
+
+                    try
+                    {
+                        line += sr.ReadLine() + "\r\n";
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show("Failed to read " + filename + ":  " + ex.Message);
+                        break;
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        MessageBox.Show("Failed to read " + filename + ":  " + ex.Message);
+                        break;
+                    }
+
                 }
                 dataRTB.Text = line;
-                sr.Close();                    
+                sr.Close();
             }
 
 
@@ -93,7 +94,8 @@ namespace Text_Editor
                 try
                 {
                     sw = new StreamWriter(File.OpenWrite(filename));
-                } catch (UnauthorizedAccessException ex)
+                }
+                catch (UnauthorizedAccessException ex)
                 {
                     MessageBox.Show("Failed to save file:  " + ex.Message);
                     return;
@@ -109,28 +111,37 @@ namespace Text_Editor
                     return;
                 }
                 //if we made it here, the file is open
-                try
+                foreach (string line in dataRTB.Lines)
                 {
-                    sw.Write(dataRTB.Text);
-                } catch (IOException ex)
-                {
-                    MessageBox.Show("Failed to save file:  " + ex.Message);
-                }
-                catch (ObjectDisposedException ex)
-                {
-                    MessageBox.Show("Failed to save file:  " + ex.Message);
+                    try
+                    {
+                        sw.WriteLine(line);
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show("Failed to save file:  " + ex.Message);
+                        break;
+                    }
+                    catch (ObjectDisposedException ex)
+                    {
+                        MessageBox.Show("Failed to save file:  " + ex.Message);
+                        break;
+                    }
+
                 }
                 //If we are here, we either saved our data or not, but we need to close the file.
                 try
                 {
                     sw.Close();
-                } catch (EncoderFallbackException ex)
+                }
+                catch (EncoderFallbackException ex)
                 {
                     MessageBox.Show("Failed to save file:  " + ex.Message);
                 }
             }
             else
             {
+                //filename == ""
                 //This shouldn't happen, but if it does, make sure it doesn't happen again.
                 saveAsMenuItem.Enabled = false;
             }
@@ -156,6 +167,23 @@ namespace Text_Editor
             text = Application.ProductName + "\r\n" + version + "\r\n" +
                     classname + "\r\n" + author;
             MessageBox.Show(text);
+        }
+
+        private void wordWrapMenuItem_Click(object sender, EventArgs e)
+        {
+            switch (wordWrapMenuItem.Checked)
+            {
+                case true:
+                    wordWrapMenuItem.Checked = false;
+                    dataRTB.WordWrap = false;
+                    dataRTB.ScrollBars = RichTextBoxScrollBars.Both;
+                    break;
+                case false:
+                    wordWrapMenuItem.Checked = true;
+                    dataRTB.WordWrap = true;
+                    dataRTB.ScrollBars = RichTextBoxScrollBars.Vertical;
+                    break;
+            }
         }
     }
 }
