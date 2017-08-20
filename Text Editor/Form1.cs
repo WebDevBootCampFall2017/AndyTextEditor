@@ -14,6 +14,7 @@ namespace Text_Editor
     public partial class Form1 : Form
     {
         string filename = "";  //used to hold the filename returned from save As dialog
+        ThemeDialog themeDialog1 = new ThemeDialog();
 
         public Form1()
         {
@@ -188,5 +189,79 @@ namespace Text_Editor
                     break;
             }
         }
+
+        /*private void toolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            int i = (int)Form1.ActiveForm.FormBorderStyle;
+            i = (i + 1) % 7;
+            
+            //MessageBox.Show("About to use value " + i);
+            if (Form1.ActiveForm != null)//it shouldn't be, but this keeps happening in debug mode
+            {
+                Form1.ActiveForm.FormBorderStyle = (FormBorderStyle)i;
+            }
+            //CommonDialog d = new CommonDialog();
+        }*/
+
+        private void themeMenuItem_Click(object sender, EventArgs e)
+        {
+            //ThemeDialog themedialog1 = new ThemeDialog();
+            if (themeDialog1.ShowDialog() == DialogResult.OK)
+            {
+                switch (themeDialog1.radioButtons)
+                {
+                    case ThemeDialog.Styles.None:
+                        Form1.ActiveForm.FormBorderStyle = (FormBorderStyle)0;
+                        break;
+                    case ThemeDialog.Styles.Fixed:
+                        Form1.ActiveForm.FormBorderStyle = (FormBorderStyle)2;
+                        break;
+                    case ThemeDialog.Styles.Sizable:
+                        //Form1.ActiveForm.FormBorderStyle = (FormBorderStyle)2;
+                        Form1.ActiveForm.FormBorderStyle = (FormBorderStyle)4;
+                        //Form1.ActiveForm.ShowIcon = true;
+                        //Form1.ActiveForm.Refresh();
+                        break;
+                }
+                switch (themeDialog1.windowColorSelected)
+                {
+                    
+                    case ThemeDialog.windowColors.Default:
+                        Form1.ActiveForm.BackColor = Form1.DefaultBackColor;
+                        dataRTB.BackColor = System.Drawing.Color.White;
+                        break;
+                    case ThemeDialog.windowColors.LightBlue:
+                        Form1.ActiveForm.BackColor = System.Drawing.Color.LightBlue;
+                        dataRTB.BackColor = System.Drawing.Color.LightBlue;
+                        break;
+                    case ThemeDialog.windowColors.LightGreen:
+                        Form1.ActiveForm.BackColor = System.Drawing.Color.LightGreen;
+                        dataRTB.BackColor = System.Drawing.Color.LightGreen;
+                        break;
+                }
+                switch (themeDialog1.textColorSelected)
+                {
+                    case ThemeDialog.textColors.Black:
+                        Form1.ActiveForm.ForeColor = System.Drawing.Color.Black;
+                        dataRTB.ForeColor = System.Drawing.Color.Black;
+                        break;
+                    case ThemeDialog.textColors.Red:
+                        Form1.ActiveForm.ForeColor = System.Drawing.Color.Red;
+                        dataRTB.ForeColor = System.Drawing.Color.Red;
+                        break;
+                    case ThemeDialog.textColors.Blue:
+                        Form1.ActiveForm.ForeColor = System.Drawing.Color.Blue;
+                        dataRTB.ForeColor = System.Drawing.Color.Blue;
+                        break;
+                    case ThemeDialog.textColors.Green:
+                        Form1.ActiveForm.ForeColor = System.Drawing.Color.Green;
+                        dataRTB.ForeColor = System.Drawing.Color.Green;
+                        break;
+                }
+            }
+
+        }
+
+        
     }
 }

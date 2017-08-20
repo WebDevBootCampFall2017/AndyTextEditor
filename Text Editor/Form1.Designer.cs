@@ -35,14 +35,14 @@
             this.saveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontSizeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontStyleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontColorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findAndReplceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.themeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wordWrapMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +86,7 @@
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
-            this.openMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.openMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openMenuItem.Text = "Open...";
             this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
@@ -94,59 +94,59 @@
             // 
             this.saveMenuItem.Enabled = false;
             this.saveMenuItem.Name = "saveMenuItem";
-            this.saveMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveMenuItem.Text = "Save";
             this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // saveAsMenuItem
             // 
             this.saveAsMenuItem.Name = "saveAsMenuItem";
-            this.saveAsMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAsMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsMenuItem.Text = "Save As...";
             this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem7,
-            this.toolStripMenuItem8,
-            this.toolStripMenuItem9,
-            this.toolStripMenuItem10,
-            this.toolStripMenuItem11,
+            this.fontMenuItem,
+            this.fontSizeMenuItem,
+            this.fontStyleMenuItem,
+            this.fontColorMenuItem,
+            this.findMenuItem,
             this.findAndReplceToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(39, 20);
             this.toolStripMenuItem2.Text = "Edit";
             // 
-            // toolStripMenuItem7
+            // fontMenuItem
             // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(158, 22);
-            this.toolStripMenuItem7.Text = "Font...";
+            this.fontMenuItem.Name = "fontMenuItem";
+            this.fontMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.fontMenuItem.Text = "Font...";
             // 
-            // toolStripMenuItem8
+            // fontSizeMenuItem
             // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(158, 22);
-            this.toolStripMenuItem8.Text = "Font Size";
+            this.fontSizeMenuItem.Name = "fontSizeMenuItem";
+            this.fontSizeMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.fontSizeMenuItem.Text = "Font Size";
             // 
-            // toolStripMenuItem9
+            // fontStyleMenuItem
             // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(158, 22);
-            this.toolStripMenuItem9.Text = "Font Style";
+            this.fontStyleMenuItem.Name = "fontStyleMenuItem";
+            this.fontStyleMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.fontStyleMenuItem.Text = "Font Style";
             // 
-            // toolStripMenuItem10
+            // fontColorMenuItem
             // 
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(158, 22);
-            this.toolStripMenuItem10.Text = "Font Color";
+            this.fontColorMenuItem.Name = "fontColorMenuItem";
+            this.fontColorMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.fontColorMenuItem.Text = "Font Color";
             // 
-            // toolStripMenuItem11
+            // findMenuItem
             // 
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(158, 22);
-            this.toolStripMenuItem11.Text = "Find";
+            this.findMenuItem.Name = "findMenuItem";
+            this.findMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.findMenuItem.Text = "Find";
             // 
             // findAndReplceToolStripMenuItem
             // 
@@ -157,17 +157,18 @@
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem13,
+            this.themeMenuItem,
             this.wordWrapMenuItem});
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(44, 20);
             this.toolStripMenuItem6.Text = "View";
             // 
-            // toolStripMenuItem13
+            // themeMenuItem
             // 
-            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem13.Text = "Theme";
+            this.themeMenuItem.Name = "themeMenuItem";
+            this.themeMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.themeMenuItem.Text = "Theme";
+            this.themeMenuItem.Click += new System.EventHandler(this.themeMenuItem_Click);
             // 
             // wordWrapMenuItem
             // 
@@ -187,7 +188,7 @@
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutMenuItem.Text = "About...";
             this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
@@ -238,14 +239,14 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
+        private System.Windows.Forms.ToolStripMenuItem fontMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fontSizeMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fontStyleMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fontColorMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findAndReplceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
+        private System.Windows.Forms.ToolStripMenuItem themeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wordWrapMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
