@@ -36,9 +36,6 @@
             this.saveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.fontMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontSizeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontStyleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontColorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findAndReplceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +45,7 @@
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +84,7 @@
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
-            this.openMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMenuItem.Size = new System.Drawing.Size(123, 22);
             this.openMenuItem.Text = "Open...";
             this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
@@ -94,14 +92,14 @@
             // 
             this.saveMenuItem.Enabled = false;
             this.saveMenuItem.Name = "saveMenuItem";
-            this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveMenuItem.Text = "Save";
             this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // saveAsMenuItem
             // 
             this.saveAsMenuItem.Name = "saveAsMenuItem";
-            this.saveAsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsMenuItem.Text = "Save As...";
             this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
             // 
@@ -109,9 +107,6 @@
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fontMenuItem,
-            this.fontSizeMenuItem,
-            this.fontStyleMenuItem,
-            this.fontColorMenuItem,
             this.findMenuItem,
             this.findAndReplceToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
@@ -123,24 +118,7 @@
             this.fontMenuItem.Name = "fontMenuItem";
             this.fontMenuItem.Size = new System.Drawing.Size(158, 22);
             this.fontMenuItem.Text = "Font...";
-            // 
-            // fontSizeMenuItem
-            // 
-            this.fontSizeMenuItem.Name = "fontSizeMenuItem";
-            this.fontSizeMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.fontSizeMenuItem.Text = "Font Size";
-            // 
-            // fontStyleMenuItem
-            // 
-            this.fontStyleMenuItem.Name = "fontStyleMenuItem";
-            this.fontStyleMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.fontStyleMenuItem.Text = "Font Style";
-            // 
-            // fontColorMenuItem
-            // 
-            this.fontColorMenuItem.Name = "fontColorMenuItem";
-            this.fontColorMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.fontColorMenuItem.Text = "Font Color";
+            this.fontMenuItem.Click += new System.EventHandler(this.fontMenuItem_Click_1);
             // 
             // findMenuItem
             // 
@@ -166,14 +144,14 @@
             // themeMenuItem
             // 
             this.themeMenuItem.Name = "themeMenuItem";
-            this.themeMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.themeMenuItem.Size = new System.Drawing.Size(131, 22);
             this.themeMenuItem.Text = "Theme";
             this.themeMenuItem.Click += new System.EventHandler(this.themeMenuItem_Click);
             // 
             // wordWrapMenuItem
             // 
             this.wordWrapMenuItem.Name = "wordWrapMenuItem";
-            this.wordWrapMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.wordWrapMenuItem.Size = new System.Drawing.Size(131, 22);
             this.wordWrapMenuItem.Text = "WordWrap";
             this.wordWrapMenuItem.Click += new System.EventHandler(this.wordWrapMenuItem_Click);
             // 
@@ -188,7 +166,7 @@
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMenuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutMenuItem.Text = "About...";
             this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
@@ -240,9 +218,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem fontMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fontSizeMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fontStyleMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fontColorMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findAndReplceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
@@ -255,6 +230,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FontDialog fontDialog1;
     }
 }
 

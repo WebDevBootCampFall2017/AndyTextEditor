@@ -162,9 +162,7 @@ namespace Text_Editor
         }
 
         private void aboutMenuItem_Click(object sender, EventArgs e)
-        {
-
-            String text = "";
+        {           String text = "";
             String author = "Author:  James A. Stewart";
             string classname = "Web Development Boot Camp";
             string version = Application.ProductVersion;
@@ -263,5 +261,16 @@ namespace Text_Editor
         }
 
         
-    }
+
+        private void fontMenuItem_Click_1(object sender, EventArgs e)
+        {
+            fontDialog1.ShowColor = true;
+            DialogResult dr = fontDialog1.ShowDialog();
+            if (dr == DialogResult.OK)
+            {               
+            dataRTB.Font = fontDialog1.Font;
+                dataRTB.ForeColor = fontDialog1.Color;
+            }
+        }
+    } 
 }
