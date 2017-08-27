@@ -125,12 +125,14 @@
             this.findMenuItem.Name = "findMenuItem";
             this.findMenuItem.Size = new System.Drawing.Size(158, 22);
             this.findMenuItem.Text = "Find";
+            this.findMenuItem.Click += new System.EventHandler(this.findMenuItem_Click);
             // 
             // findAndReplceToolStripMenuItem
             // 
             this.findAndReplceToolStripMenuItem.Name = "findAndReplceToolStripMenuItem";
             this.findAndReplceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.findAndReplceToolStripMenuItem.Text = "Find and Replce";
+            this.findAndReplceToolStripMenuItem.Click += new System.EventHandler(this.findAndReplceToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 

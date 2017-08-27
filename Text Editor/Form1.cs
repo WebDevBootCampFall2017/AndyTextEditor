@@ -15,10 +15,16 @@ namespace Text_Editor
     {
         string filename = "";  //used to hold the filename returned from save As dialog
         ThemeDialog themeDialog1 = new ThemeDialog();
+        findAndReplaceDialog frdialog1 = new findAndReplaceDialog();
 
         public Form1()
         {
             InitializeComponent();
+            dataRTB.WordWrap = true;
+            wordWrapMenuItem.CheckState = CheckState.Checked;
+            frdialog1.Changed += new EventHandler(modeChanged);     //registering my event handler
+            frdialog1.FindClicked += new EventHandler(findclicked);
+            frdialog1.ReplaceClicked += new EventHandler(replaceclicked);
         }
 
         private void openMenuItem_Click(object sender, EventArgs e)
@@ -270,6 +276,75 @@ namespace Text_Editor
             {               
             dataRTB.Font = fontDialog1.Font;
                 dataRTB.ForeColor = fontDialog1.Color;
+            }
+        }
+
+        private void findMenuItem_Click(object sender, EventArgs e)
+        {
+            frdialog1.Mode = true;  //I setup a event handler to react to Mode being changed.
+            frdialog1.Show();
+        }
+
+        private void findAndReplceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frdialog1.Mode = false;            
+            frdialog1.Show();
+        }
+
+        void modeChanged (object sender, EventArgs e)   //this gets called whenever Mode is changed.
+        {
+            findAndReplaceDialog d = (findAndReplaceDialog)sender;
+            if (d.Mode == true)
+            {
+                //going into Find mode
+                frdialog1.enterFindMode();
+
+            }
+            else
+            {
+                //going into Find and Replace mode
+                frdialog1.enterFindReplaceMode();
+            }
+        }
+
+        void findclicked(object sender, EventArgs e)
+        {
+            string target = frdialog1.target;
+            if (dataRTB.Text.Length > 0)    //if the textbox is not empty
+            {
+                if (dataRTB.Text.Contains(target))  //if the target is int the textbox
+                {
+                    int index = dataRTB.Text.IndexOf(target);
+                    dataRTB.Select(index, 0);
+                    dataRTB.Focus();
+                } else
+                {
+                    MessageBox.Show(target + " is not in this document.");
+                }
+            }
+        }
+
+        void replaceclicked (object sender, EventArgs e)
+        {
+            string target = frdialog1.target;
+            int l = target.Length;
+            string with = frdialog1.replacewith;
+            if (with.Length > 0)            //if there is a replace string
+            {
+                if (dataRTB.Text.Length > 0)    //if the textbox is not empty
+                {
+                    if (dataRTB.Text.Contains(target))  //if the target is int the textbox
+                    {
+                        int index = dataRTB.Text.IndexOf(target);
+                        dataRTB.Select(index, l);
+                        dataRTB.SelectedText = with;
+                        dataRTB.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show(target + " is not in this document.");
+                    }
+                }
             }
         }
     } 
