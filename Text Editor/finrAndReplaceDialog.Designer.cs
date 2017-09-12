@@ -35,6 +35,7 @@
             this.findButton = new System.Windows.Forms.Button();
             this.replaceButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.replaceAllButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -78,9 +79,9 @@
             this.findButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.findButton.Location = new System.Drawing.Point(340, 32);
             this.findButton.Name = "findButton";
-            this.findButton.Size = new System.Drawing.Size(89, 33);
+            this.findButton.Size = new System.Drawing.Size(119, 33);
             this.findButton.TabIndex = 4;
-            this.findButton.Text = "Find";
+            this.findButton.Text = "Find Next";
             this.findButton.UseVisualStyleBackColor = true;
             this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
@@ -89,9 +90,9 @@
             this.replaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replaceButton.Location = new System.Drawing.Point(340, 96);
             this.replaceButton.Name = "replaceButton";
-            this.replaceButton.Size = new System.Drawing.Size(89, 30);
+            this.replaceButton.Size = new System.Drawing.Size(119, 30);
             this.replaceButton.TabIndex = 5;
-            this.replaceButton.Text = "Replace";
+            this.replaceButton.Text = "Replace Next";
             this.replaceButton.UseVisualStyleBackColor = true;
             this.replaceButton.Click += new System.EventHandler(this.replaceButton_Click);
             // 
@@ -106,11 +107,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // replaceAllButton
+            // 
+            this.replaceAllButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replaceAllButton.Location = new System.Drawing.Point(340, 133);
+            this.replaceAllButton.Name = "replaceAllButton";
+            this.replaceAllButton.Size = new System.Drawing.Size(119, 30);
+            this.replaceAllButton.TabIndex = 7;
+            this.replaceAllButton.Text = "Replace All";
+            this.replaceAllButton.UseVisualStyleBackColor = true;
+            this.replaceAllButton.Click += new System.EventHandler(this.replaceAllButton_Click);
+            // 
             // findAndReplaceDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 181);
+            this.ClientSize = new System.Drawing.Size(473, 174);
+            this.Controls.Add(this.replaceAllButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.replaceButton);
             this.Controls.Add(this.findButton);
@@ -136,5 +149,6 @@
         private System.Windows.Forms.Button findButton;
         private System.Windows.Forms.Button replaceButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button replaceAllButton;
     }
 }

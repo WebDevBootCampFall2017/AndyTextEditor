@@ -26,6 +26,7 @@ namespace Text_Editor
             public const int LightBlue = 1;
             public const int LightGreen = 2;
         }
+        /*
         public int textColorSelected;
         public class textColors
         {            
@@ -33,7 +34,7 @@ namespace Text_Editor
             public const int Red = 1;
             public const int Blue = 2;
             public const int Green = 3;
-        }
+        }*/
 
         public ThemeDialog()
         {
@@ -42,7 +43,7 @@ namespace Text_Editor
             fixedRB.Checked = false;
             sizableRB.Checked = true;
             windowColorsLB.SelectedIndex = 0;
-            textColorsLB.SelectedIndex = 0;
+            //textColorsLB.SelectedIndex = 0;
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -52,7 +53,7 @@ namespace Text_Editor
             if (fixedRB.Checked) { radioButtons = Styles.Fixed; }
             if (sizableRB.Checked) { radioButtons = Styles.Sizable; }
             windowColorSelected = windowColorsLB.SelectedIndex;
-            textColorSelected = textColorsLB.SelectedIndex;
+            //textColorSelected = textColorsLB.SelectedIndex;
             this.DialogResult = DialogResult.OK;
         }
 

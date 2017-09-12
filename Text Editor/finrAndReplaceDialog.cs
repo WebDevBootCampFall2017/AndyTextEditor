@@ -30,6 +30,7 @@ namespace Text_Editor
         public string replacewith;
         public event EventHandler FindClicked;
         public event EventHandler ReplaceClicked;
+        public event EventHandler ReplaceAllClicked;
         public void enterFindMode()
         {
             replaceButton.Enabled = false;
@@ -37,6 +38,9 @@ namespace Text_Editor
             replaceTB.Enabled = false;
             replaceTB.Visible = false;
             label2.Visible = false;
+            replaceAllButton.Enabled = false;
+            replaceAllButton.Visible = false;
+            this.AcceptButton = findButton;
         }
         public void enterFindReplaceMode()
         {
@@ -45,6 +49,9 @@ namespace Text_Editor
             replaceTB.Enabled = true;
             replaceTB.Visible = true;
             label2.Visible = true;
+            replaceAllButton.Enabled = true;
+            replaceAllButton.Visible = true;
+            this.AcceptButton = replaceButton;
         }
         public findAndReplaceDialog()
         {
@@ -64,6 +71,13 @@ namespace Text_Editor
             target = findTB.Text;
             replacewith = replaceTB.Text;
             ReplaceClicked(this, EventArgs.Empty);
+        }
+
+        private void replaceAllButton_Click(object sender, EventArgs e)
+        {
+            target = findTB.Text;
+            replacewith = replaceTB.Text;
+            ReplaceAllClicked(this, EventArgs.Empty);
         }
 
         private void button1_Click(object sender, EventArgs e)

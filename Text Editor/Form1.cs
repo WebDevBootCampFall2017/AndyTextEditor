@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -14,6 +15,8 @@ namespace Text_Editor
     public partial class Form1 : Form
     {
         string filename = "";  //used to hold the filename returned from save As dialog
+        int cursor;
+        ArrayList replaceIndexes = new ArrayList();
         ThemeDialog themeDialog1 = new ThemeDialog();
         findAndReplaceDialog frdialog1 = new findAndReplaceDialog();
 
@@ -25,6 +28,7 @@ namespace Text_Editor
             frdialog1.Changed += new EventHandler(modeChanged);     //registering my event handler
             frdialog1.FindClicked += new EventHandler(findclicked);
             frdialog1.ReplaceClicked += new EventHandler(replaceclicked);
+            frdialog1.ReplaceAllClicked += new EventHandler(replaceAllClicked);
         }
 
         private void openMenuItem_Click(object sender, EventArgs e)
@@ -193,20 +197,7 @@ namespace Text_Editor
                     break;
             }
         }
-
-        /*private void toolStripMenuItem13_Click(object sender, EventArgs e)
-        {
-            int i = (int)Form1.ActiveForm.FormBorderStyle;
-            i = (i + 1) % 7;
-            
-            //MessageBox.Show("About to use value " + i);
-            if (Form1.ActiveForm != null)//it shouldn't be, but this keeps happening in debug mode
-            {
-                Form1.ActiveForm.FormBorderStyle = (FormBorderStyle)i;
-            }
-            //CommonDialog d = new CommonDialog();
-        }*/
-
+        
         private void themeMenuItem_Click(object sender, EventArgs e)
         {
             //ThemeDialog themedialog1 = new ThemeDialog();
@@ -243,6 +234,7 @@ namespace Text_Editor
                         dataRTB.BackColor = System.Drawing.Color.LightGreen;
                         break;
                 }
+                /*
                 switch (themeDialog1.textColorSelected)
                 {
                     case ThemeDialog.textColors.Black:
@@ -261,13 +253,11 @@ namespace Text_Editor
                         Form1.ActiveForm.ForeColor = System.Drawing.Color.Green;
                         dataRTB.ForeColor = System.Drawing.Color.Green;
                         break;
-                }
+                }*/
             }
 
         }
-
         
-
         private void fontMenuItem_Click_1(object sender, EventArgs e)
         {
             fontDialog1.ShowColor = true;
@@ -310,6 +300,87 @@ namespace Text_Editor
         void findclicked(object sender, EventArgs e)
         {
             string target = frdialog1.target;
+            string field = dataRTB.Text;
+            string message, title;
+            int start=0;    //holds the index of the cursor
+            int instance=-1;
+            bool found = false;
+            bool startAtBeginning = true;   //indicates whether the curor is at the start of the textbox
+            findAll(target);
+            /*//debug message
+            message = "The target: " + target + " is in the file " + replaceIndexes.Count + " times.\n\r";
+            if (replaceIndexes.Count > 0)
+            {
+                for (int i = 0; i < replaceIndexes.Count; i++)
+                {
+                    message += "at index: " + replaceIndexes[i] + "\n\r";
+                }                
+            }
+            MessageBox.Show(message);
+            */
+            //if the cursor is not at the beginning, change the field to start at the cursor
+            if (dataRTB.SelectionStart > 0)
+            {
+                start = dataRTB.SelectionStart;
+                field = dataRTB.Text.Substring(start);
+                startAtBeginning = false;
+            }
+            if (field.Contains(target)) //if it is after the cursor
+            {
+                //find and highlight                
+                for (int i = 0; i < replaceIndexes.Count; i++)
+                {
+                    if ((int)replaceIndexes[i] >= start)
+                    {
+                        instance = (int)replaceIndexes[i];
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)     //something went wrong.  This should not happen.
+                {
+                    return;
+                }
+                //highlight it. return focus to main window
+                dataRTB.Select(instance, target.Length);
+                dataRTB.Focus();
+                dataRTB.ScrollToCaret();
+
+            } else
+            {
+                //it's not in this part of the textbox.  search from start?
+                if (!startAtBeginning)
+                {   //ask if we should start from beginning
+                    message = target + " is not found after the cursor.  Do you want to search from the beginning?";
+                    title = "Not Found";
+                    DialogResult dr = MessageBox.Show(message, title, MessageBoxButtons.YesNo);
+                    if (dr == DialogResult.Yes)
+                    {
+                        //if the user clicks yes
+                        field = dataRTB.Text;
+                        if (field.Contains(target)) //if it's here
+                        {
+                            dataRTB.Select((int)replaceIndexes[0], target.Length);
+                            dataRTB.Focus();
+                            dataRTB.ScrollToCaret();
+                        }
+                        else     // it's not here either
+                        {
+                            message = target + " is not found";
+                            title = "Not Found";
+                            MessageBox.Show(message, title, MessageBoxButtons.OK);
+                        }
+                    }
+                } else //we started from the beginning and didn't find it
+                {
+                    message = target + " is not found";
+                    title = "Not Found";
+                    MessageBox.Show(message, title, MessageBoxButtons.OK);
+                }
+            }
+
+            /*  // The old version.  
+            string target = frdialog1.target;
             if (dataRTB.Text.Length > 0)    //if the textbox is not empty
             {
                 if (dataRTB.Text.Contains(target))  //if the target is int the textbox
@@ -322,10 +393,93 @@ namespace Text_Editor
                     MessageBox.Show(target + " is not in this document.");
                 }
             }
+            */
         }
 
         void replaceclicked (object sender, EventArgs e)
-        {
+        {   //Replace Next function
+            string message = "";
+            string title = "";
+            int start = 0;  //holds the index to start searching from
+            bool startAtBeginning = true;
+            string field = dataRTB.Text;
+            bool found = false;
+            int instance = 0;
+            //get replace withstring
+            string with = frdialog1.replacewith; 
+            //set target
+            string target = frdialog1.target;
+            //find all instances
+            findAll(target);
+            //if not found
+            if (replaceIndexes.Count == 0)
+            {
+                message = target + " is not found in this file.";
+                title = "Not Found";
+                MessageBox.Show(message, title, MessageBoxButtons.OK);
+                return;
+            }
+            //get cursor location
+            if (dataRTB.SelectionStart > 0)
+            {
+                start = dataRTB.SelectionStart;
+                field = dataRTB.Text.Substring(start);
+                startAtBeginning = false;
+            }
+            if (startAtBeginning)
+            {
+                //find the target
+                dataRTB.Select((int)replaceIndexes[0], target.Length);
+                //replace it
+                dataRTB.SelectedText = with;
+                dataRTB.ScrollToCaret();
+                dataRTB.Focus();
+                dataRTB.Select((int)replaceIndexes[0] + with.Length, 0);
+            } else
+            {
+                //try to find the target
+                for (int i=0; i < replaceIndexes.Count; i++)
+                {
+                    if ((int)replaceIndexes[i] >= start)
+                    {
+                        found = true;
+                        instance = (int)replaceIndexes[i];
+                        break;
+                    }
+                }
+                if (found)
+                {
+                    //find the target
+                    dataRTB.Select(instance, target.Length);
+                    //replace it
+                    dataRTB.SelectedText = with;
+                    dataRTB.ScrollToCaret();
+                    dataRTB.Focus();
+                    dataRTB.Select(instance + with.Length, 0);
+                }
+                else //if it's not there ask to search from beginning
+                {
+                    message = target + " is not found after the cursor.  Search from beginning?";
+                    title = "Not Found";
+                    DialogResult dr = MessageBox.Show(message, title, MessageBoxButtons.YesNo);
+                    if (dr == DialogResult.Yes)
+                    {
+                        dataRTB.Select((int)replaceIndexes[0], target.Length);
+                        dataRTB.SelectedText = with;
+                        dataRTB.ScrollToCaret();
+                        dataRTB.Focus();
+                        dataRTB.Select((int)replaceIndexes[0] + with.Length, 0);
+                    }
+                }                
+            }
+            
+             /*       dataRTB.Select((int)replaceIndexes[0], target.Length);
+                    dataRTB.SelectedText = with;
+                    dataRTB.ScrollToCaret();
+                    dataRTB.Focus();
+                    dataRTB.Select((int)replaceIndexes[0] + with.Length, 0);    //move cursor to just after the replaced text
+            */   
+            /*  //the old version
             string target = frdialog1.target;
             int l = target.Length;
             string with = frdialog1.replacewith;
@@ -345,7 +499,57 @@ namespace Text_Editor
                         MessageBox.Show(target + " is not in this document.");
                     }
                 }
+            }*/
+        }
+        void replaceAllClicked(object sender, EventArgs e)
+        {
+            string target = frdialog1.target;
+            string with = frdialog1.replacewith;
+            string field = dataRTB.Text;
+            int adj = 0;
+            int dif = with.Length - target.Length;
+            string message = target + " is not found in this document.";
+            string title = "Not Found";
+            findAll(target);
+            if (replaceIndexes.Count > 0)
+            {
+                for (int i = 0; i < replaceIndexes.Count; i++)
+                {
+                    dataRTB.Select((int)replaceIndexes[i] +adj, target.Length);
+                    dataRTB.SelectedText = with;
+                    adj += dif;
+                    dataRTB.Select((int)replaceIndexes[i] + adj + with.Length, 0);
+                    dataRTB.ScrollToCaret();
+                }
+                dataRTB.Focus();
+                    
+            } else
+            {
+                MessageBox.Show(message, title, MessageBoxButtons.OK);
             }
+        }
+        void findAll(string t)
+        {
+            //this function puts the index of each instance of string t in dataRTB.Text into the 
+            //ArrayList replaceIndexes.
+            bool foundAll = false;
+            string field = dataRTB.Text;
+            replaceIndexes.Clear();
+            int i, adj = 0; //holds the index of the next instance of target in field (i), and an adjustment to correct that index to the start of the original field(adj)    
+            do
+            {
+                if (field.Contains(t))
+                {
+
+                    i = field.IndexOf(t);
+                    replaceIndexes.Add(i + adj);
+                    field = field.Substring(i + t.Length);
+                    adj += i + t.Length;
+                } else
+                {
+                    foundAll = true;
+                }
+            } while (!foundAll);
         }
     } 
 }
