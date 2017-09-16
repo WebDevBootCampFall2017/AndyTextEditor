@@ -31,6 +31,7 @@ namespace Text_Editor
         public event EventHandler FindClicked;
         public event EventHandler ReplaceClicked;
         public event EventHandler ReplaceAllClicked;
+
         public void enterFindMode()
         {
             replaceButton.Enabled = false;
@@ -53,6 +54,7 @@ namespace Text_Editor
             replaceAllButton.Visible = true;
             this.AcceptButton = replaceButton;
         }
+
         public findAndReplaceDialog()
         {
             InitializeComponent();

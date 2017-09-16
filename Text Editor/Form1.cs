@@ -158,7 +158,7 @@ namespace Text_Editor
                 saveAsMenuItem.Enabled = false;
             }
         }
-
+        
         private void saveAsMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
